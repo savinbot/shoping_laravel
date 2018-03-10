@@ -82,5 +82,25 @@ Route::group(['namespace' => 'Auth'] , function (){
     $this->post('password/reset', 'ResetPasswordController@reset');
 });
 
+/* upload image with jquery/ajax in laravel
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/getdata',function (){
+    $file = request()->file('pic');
+    $year=\Carbon\Carbon::now()->year;
+    $imagePath="/upload/images/{$year}/";
+    $filename=$file->getClientOriginalName();
+
+    $file=$file->move(public_path($imagePath),$filename);
+
+    return $imagePath . $filename;
+});
+
+Route::get('/',function (){
+   return view('home');
+});
+*/
+
+
+
