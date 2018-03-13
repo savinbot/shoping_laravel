@@ -13,15 +13,48 @@ use Illuminate\Http\Request;
 |
 */
 
-
-
-Route::group(['prefix' => 'v1' , 'namespace' => 'Api\v1'] , function (){
-   $this->get('articles' , 'ArticleController@articles');
-   $this->post('comment' , 'ArticleController@comment');
-   $this->post('login' , 'UserController@login');
+Route::group([ 'namespace'=>'Api\v1' , 'prefix'=>'v1'],function (){
+   $this->get('articles','ArticleController@articles');
+   $this->post('comments','ArticleController@comments');
+   $this->post('login','UserController@login');
     Route::middleware('auth:api')->group(function(){
         $this->get('/user', function (Request $request) {
             return auth()->user();
         });
     });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Route::group(['prefix' => 'v1' , 'namespace' => 'Api\v1'] , function (){
+//   $this->get('articles' , 'ArticleController@articles');
+//   $this->post('comment' , 'ArticleController@comment');
+//   $this->post('login' , 'UserController@login');
+//    Route::middleware('auth:api')->group(function(){
+//        $this->get('/user', function (Request $request) {
+//            return auth()->user();
+//        });
+//    });
+//});

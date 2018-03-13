@@ -7,21 +7,29 @@ use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
-    public function articles()
-    {
-        $articles = Article::select('title' , 'slug' , 'description' , 'user_id')->latest()->get();
-        return response(['data' => ['articles' => $articles ] , 'status' => 200] , 200);
+    public function articles(){
+        $articles=Article::select('title','user_id','description')->latest()->get();
+        return response(['data'=>['articles'=>$articles],'status'=>200],200);
+
     }
 
-    public function comment(Request $request)
-    {
-        $validator = Validator::make($request->all() , [
+    public function comments(Request $request){
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'comment' => 'required'
         ]);
+        //nemishe az payini estefade kard shayad be khatere ink az http session estefade mikone(96.12.19:()
+//        $validator = $request->validate([
+//            'name' => 'required',
+//            'comment' => 'required'
+//        ]);
+//        $errors = $validator->errors();
 
-        if($validator->fails()) {
-            return response(['data' => $validator->errors()->all() , 'status' => 403] , 403);
-        }
+
+
+        if ($validator->fails())
+            return response(['data'=>$validator->errors()->all(),'status'=>401],401);
+        else
+            return response(['data' => [$request->name,$request->comment] , 'status' => 200] , 200);
     }
 }
